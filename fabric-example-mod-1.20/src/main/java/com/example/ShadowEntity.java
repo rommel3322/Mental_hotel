@@ -1,9 +1,13 @@
 package com.example;
 
-import mod.azure.azurelib.common.api.common.animatable.GeoEntity;
-import mod.azure.azurelib.common.internal.common.util.AzureLibUtil;
-import mod.azure.azurelib.core.animatable.instance.AnimatableInstanceCache;
-import mod.azure.azurelib.core.animation.*;
+// ІМПОРТИ ГЕКОЛІБА (Змінено)
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.util.GeckoLibUtil;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -20,7 +24,9 @@ import net.minecraft.world.World;
 import java.util.UUID;
 
 public class ShadowEntity extends PathAwareEntity implements GeoEntity {
-    private final AnimatableInstanceCache cache = AzureLibUtil.createInstanceCache(this);
+    // 1. Налаштування кешу (Змінено на GeckoLibUtil)
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
     private UUID ownerUuid;
     private int lifeTicks = 0;
     private int exitTimer = 0;
@@ -65,6 +71,7 @@ public class ShadowEntity extends PathAwareEntity implements GeoEntity {
 
             if (!isExiting) {
                 owner.setInvisible(true);
+                // GENERIC_SCALE в 1.20.6 працює через AttributeInstance
                 owner.getAttributeInstance(EntityAttributes.GENERIC_SCALE).setBaseValue(0.01f);
 
                 owner.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, 10, 0, false, false, false));
@@ -85,6 +92,7 @@ public class ShadowEntity extends PathAwareEntity implements GeoEntity {
                 if (exitTimer >= 20) {
                     owner.getAttributeInstance(EntityAttributes.GENERIC_SCALE).setBaseValue(1.0f);
                     this.discard();
+                    // ExampleMod.ACTIVE_SHADOWS - переконайся, що цей список існує в головному класі
                     ExampleMod.ACTIVE_SHADOWS.remove(owner.getUuid());
                 }
             }
@@ -110,6 +118,7 @@ public class ShadowEntity extends PathAwareEntity implements GeoEntity {
         }
     }
 
+    // 2. Анімації (Змінено типи на GeckoLib)
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 2, event -> {

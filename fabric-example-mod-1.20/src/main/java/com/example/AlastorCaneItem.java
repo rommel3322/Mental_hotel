@@ -36,7 +36,6 @@ public class AlastorCaneItem extends Item {
                 // 2. Якщо просто клік — активуємо Вибух
                 performShadowBlast(user, serverWorld);
             }
-
             // Кулдаун 2 секунди
             user.getItemCooldownManager().set(this, 40);
         }

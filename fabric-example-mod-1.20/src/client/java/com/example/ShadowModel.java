@@ -1,12 +1,14 @@
 package com.example;
 
- // Спробуй цей шлях
-import mod.azure.azurelib.common.api.client.model.GeoModel;
+// ЗМІНЕНО: Імпорт GeckoLib замість AzureLib
+import software.bernie.geckolib.model.GeoModel;
 import net.minecraft.util.Identifier;
 
 public class ShadowModel extends GeoModel<ShadowEntity> {
+
     @Override
     public Identifier getModelResource(ShadowEntity animatable) {
+        // Identifier.of — правильний метод для 1.20.6
         return Identifier.of("example", "geo/shadow.geo.json");
     }
 

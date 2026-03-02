@@ -7,21 +7,40 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
+import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
+
+import static com.example.ExampleMod.MOD_ID;
+
 
 public class ExampleModClient implements ClientModInitializer {
     private static final Identifier HUD_TEXTURE = Identifier.of("example", "textures/gui/alastor_hud.png");
     public static int selectedSkill = 0;
     public static boolean isAlastor = false;
+    public static boolean isUltActive = false; // Змінна для ульти
+    public static final Item ALASTOR_HORNS = new AlastorHornsItem();
 
     @Override
     public void onInitializeClient() {
+
+        GeoRenderProvider.of(ExampleMod.ALASTOR_HORNS);
+
         // Реєстрація рендерів
         EntityRendererRegistry.register(ExampleMod.TENTACLE, TentacleRenderer::new);
         EntityRendererRegistry.register(ExampleMod.SHADOW, ShadowRenderer::new);
         EntityRendererRegistry.register(ExampleMod.MINION, MinionRenderer::new);
+        Registry.register(Registries.ITEM, Identifier.of(MOD_ID, "alastor_horns"), ALASTOR_HORNS);
+
 
         KeyBinding switchKey = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.example.switch", GLFW.GLFW_KEY_Z, "category.alastor"));
         KeyBinding useKey = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.example.use", GLFW.GLFW_KEY_X, "category.alastor"));

@@ -1,26 +1,27 @@
 package com.example;
 
-import mod.azure.azurelib.common.api.client.model.GeoModel;
+// ЗМІНЕНО: Імпорт GeckoLib замість AzureLib
+import software.bernie.geckolib.model.GeoModel;
 import net.minecraft.util.Identifier;
 
 public class TentacleModel extends GeoModel<TentacleEntity> {
 
-    // Кажемо, де лежить 3D модель (.geo.json)
+    // Де лежить 3D модель (.geo.json)
     @Override
     public Identifier getModelResource(TentacleEntity animatable) {
+        // Identifier.of — це правильний синтаксис для 1.20.6
         return Identifier.of("example", "geo/tentacle.geo.json");
     }
 
-    // Кажемо, де лежить текстура (.png)
+    // Де лежить текстура (.png)
     @Override
     public Identifier getTextureResource(TentacleEntity animatable) {
         return Identifier.of("example", "textures/entity/tentacle.png");
     }
 
-    // Кажемо, де лежать анімації (.animation.json)
+    // Де лежать анімації (.animation.json)
     @Override
     public Identifier getAnimationResource(TentacleEntity animatable) {
-        // Перевір, щоб назва файлу була точно такою, як у папці animations
         return Identifier.of("example", "animations/tentacle.animation.json");
     }
 }

@@ -1,11 +1,12 @@
 package com.example;
 
-import mod.azure.azurelib.common.api.client.renderer.GeoEntityRenderer;
+// ЗМІНЕНО: Імпорт GeckoLib
+import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 
 public class TentacleRenderer extends GeoEntityRenderer<TentacleEntity> {
-    public TentacleRenderer(EntityRendererFactory.Context randerManager){
-        super(randerManager, new TentacleModel());
+    public TentacleRenderer(EntityRendererFactory.Context renderManager) {
+        // У GeckoLib 4 конструктор такий самий
+        super(renderManager, new TentacleModel());
     }
-    {}
 }
