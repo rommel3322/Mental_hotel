@@ -78,6 +78,21 @@ public class ExampleMod implements ModInitializer {
             })));
         });
 
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+            dispatcher.register(literal("alastor").then(literal("ult").executes(context -> {
+                // Перемикаємо стан ульти
+                ExampleMod.isUltActive = !ExampleMod.isUltActive;
+
+                String status = ExampleMod.isUltActive ? "§c§lУЛЬТА АКТИВОВАНА" : "§7Ульта вимкнена";
+                context.getSource().sendFeedback(() -> Text.literal(status), false);
+
+                // ВАЖЛИВО: Оскільки це серверна команда, нам треба сказати Клієнту оновити картинку
+                // Якщо ти тестуєш в одиночній грі, це може спрацювати і так,
+                // але для мультиплеєра треба шлях через пакети (Networking).
+                return 1;
+            })));
+        });
+
         // Обробник скілів
         ServerPlayNetworking.registerGlobalReceiver(SkillPayload.ID, (payload, context) -> {
             context.player().getServer().execute(() -> {
