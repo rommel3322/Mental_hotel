@@ -36,7 +36,6 @@ public class ExampleMod implements ModInitializer {
     public static final String MOD_ID = "example";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static boolean isUltActive = false;
-    public static final Item ALASTOR_HORNS = new AlastorHornsItem();
 
     // Предмети
     public static final Item ALASTOR_CANE = new AlastorCaneItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC));
@@ -61,8 +60,7 @@ public class ExampleMod implements ModInitializer {
         Registry.register(Registries.ITEM, Identifier.of(MOD_ID, "alastor_cane"), ALASTOR_CANE);
         FabricDefaultAttributeRegistry.register(TENTACLE, TentacleEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(SHADOW, ShadowEntity.createLivingAttributes());
-        FabricDefaultAttributeRegistry.register(MINION, MinionEntity.createMinionAttributes());
-        Registry.register(Registries.ITEM, Identifier.of(MOD_ID, "alastor_horns"), ALASTOR_HORNS);
+        FabricDefaultAttributeRegistry.register(MINION, MinionEntity.createMinionAttributes()); 
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
             entries.add(ALASTOR_CANE);
