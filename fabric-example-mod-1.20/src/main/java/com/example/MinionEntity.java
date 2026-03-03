@@ -65,7 +65,7 @@ public class MinionEntity extends PathAwareEntity implements GeoEntity {
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64.0)
-                .add(EntityAttributes.GENERIC_SCALE, 0.6);
+                .add(EntityAttributes.GENERIC_SCALE, 0.5);
     }
 
     // 2. Анімації (Оновлено під синтаксис GeckoLib)
