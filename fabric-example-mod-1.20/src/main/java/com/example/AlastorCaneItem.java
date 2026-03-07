@@ -34,6 +34,7 @@ public class AlastorCaneItem extends Item {
                 performRadioBeam(user, serverWorld);
             } else {
                 // 2. Якщо просто клік — активуємо Вибух
+
                 performShadowBlast(user, serverWorld);
             }
             // Кулдаун 2 секунди
